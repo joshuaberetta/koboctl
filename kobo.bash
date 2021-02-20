@@ -75,7 +75,7 @@ function main() {
         ;;
 
         gtfo)
-            echo Getting the f*** outtahere
+            echo "Getting the f*** outtahere"
             kobo_run --stop && sudo shutdown now
         ;;
 
