@@ -7,6 +7,7 @@ FORMPACK_DIR=~/kobo/formpack
 KOBO_DOCKER_DIR=~/kobo/kobo-docker
 KOBO_ENV_DIR=~/kobo/kobo-env
 KOBO_INSTALL_DIR=~/kobo/kobo-install
+EDITOR=vim
 
 function kobo_run() {
     python3 $KOBO_INSTALL_DIR/run.py $@
@@ -44,7 +45,7 @@ function main() {
         ;;
 
         restart|-r)
-            kobo_run -cf restart $2
+            kobo_run -cf restart "${@:2}"
         ;;
 
         rebuild|-R)
@@ -59,8 +60,12 @@ function main() {
             fi
         ;;
 
+        dockerfile|-df)
+            $EDITOR $KOBO_DOCKER_DIR/docker-compose.frontend.yml
+        ;;
+
         cleandb|-C)
-            sudo rm -rf $KOBO_DOCKER/.vols/{db,mongo}
+            sudo rm -rf $KOBO_DOCKER_DIR/.vols/{db,mongo}
         ;;
 
         wtf)
