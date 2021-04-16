@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 # Rather set these in .bashrc or whatever
-KPI_DIR=~/kobo/kpi
-KOBOCAT_DIR=~/kobo/kobocat
-FORMPACK_DIR=~/kobo/formpack
-KOBO_DOCKER_DIR=~/kobo/kobo-docker
-KOBO_ENV_DIR=~/kobo/kobo-env
-KOBO_INSTALL_DIR=~/kobo/kobo-install
+KPI_DIR=~/kobo2/kpi
+KOBOCAT_DIR=~/kobo2/kobocat
+FORMPACK_DIR=~/kobo2/formpack
+KOBO_DOCKER_DIR=~/kobo2/kobo-docker
+KOBO_ENV_DIR=~/kobo2/kobo-env
+KOBO_INSTALL_DIR=~/kobo2/kobo-install
 EDITOR=vim
 
 function kobo_run() {
@@ -18,14 +18,13 @@ function enter_container() {
 }
 
 function main() {
-    if [ -z $1 ]; then
-        kobo_run
-        exit 1
-    fi
-
     case $1 in
         run)
             kobo_run "${@:2}"
+        ;;
+
+        start|-s)
+            kobo_run
         ;;
 
         stop|-S)
