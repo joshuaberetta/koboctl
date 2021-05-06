@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
 # Rather set these in .bashrc or whatever
-KPI_DIR=~/kobo2/kpi
-KOBOCAT_DIR=~/kobo2/kobocat
-FORMPACK_DIR=~/kobo2/formpack
-KOBO_DOCKER_DIR=~/kobo2/kobo-docker
-KOBO_ENV_DIR=~/kobo2/kobo-env
-KOBO_INSTALL_DIR=~/kobo2/kobo-install
+KPI_DIR=~/kobo/kpi
+KOBOCAT_DIR=~/kobo/kobocat
+FORMPACK_DIR=~/kobo/formpack
+KOBO_DOCKER_DIR=~/kobo/kobo-docker
+KOBO_ENV_DIR=~/kobo/kobo-env
+KOBO_INSTALL_DIR=~/kobo/kobo-install
 EDITOR=vim
+NAME=kobo
 
 function kobo_run() {
     python3 $KOBO_INSTALL_DIR/run.py $@
@@ -61,6 +62,10 @@ function main() {
 
         dockerfile|-df)
             $EDITOR $KOBO_DOCKER_DIR/docker-compose.frontend.yml
+        ;;
+
+        edit|-e)
+            $EDITOR `which "$NAME"`
         ;;
 
         cleandb|-C)
