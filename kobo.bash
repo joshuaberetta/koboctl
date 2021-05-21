@@ -72,6 +72,16 @@ function main() {
             sudo rm -rf $KOBO_DOCKER_DIR/.vols/{db,mongo}
         ;;
 
+        rm|-D)
+            docker image ls | grep dev.kobofe | awk '{print $3}' | xargs docker image rm >/dev/null
+            sudo rm -rf {$KOBO_DOCKER_DIR,$KOBO_ENV_DIR,$KOBO_INSTALL_DIR,$KPI_DIR,$KOBOCAT_DIR,$FORMPACK_DIR}
+            git clone https://github.com/kobotoolbox/formpack.git $FORMPACK_DIR >/dev/null
+            git clone https://github.com/kobotoolbox/kobocat.git $KOBOCAT_DIR >/dev/null
+            git clone https://github.com/kobotoolbox/kpi.git $KPI_DIR >/dev/null
+            git clone https://github.com/kobotoolbox/kobo-install.git $KOBO_INSTALL_DIR >/dev/null
+            echo Done
+        ;;
+
         wtf)
             if [ -z $(which figlet) ]; then
                 echo "Install \`figlet\`"
