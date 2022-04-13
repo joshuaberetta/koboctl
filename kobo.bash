@@ -25,11 +25,19 @@ function main() {
         ;;
 
         start|-s)
-            kobo_run
+            if [ -z $2 ]; then
+                kobo_run
+            else
+                kobo_run -cf up -d $2
+            fi
         ;;
 
         stop|-S)
-            kobo_run --stop
+            if [ -z $2 ]; then
+                kobo_run --stop
+            else
+                kobo_run -cf stop $2
+            fi
         ;;
 
         logs|-l)
@@ -61,7 +69,7 @@ function main() {
         ;;
 
         dockerfile|-df)
-            $EDITOR $KOBO_DOCKER_DIR/docker-compose.frontend.yml
+            $EDITOR $KOBO_DOCKER_DIR/docker-compose.frontend.override.yml
         ;;
 
         edit|-e)
@@ -70,6 +78,10 @@ function main() {
 
         cleandb|-C)
             sudo rm -rf $KOBO_DOCKER_DIR/.vols/{db,mongo}
+        ;;
+
+        rms|-rs)
+            sudo rm -rf $KOBO_DOCKER_DIR/.vols/static/kpi && sudo rm -rf $KPI_DIR/staticfiles
         ;;
 
         rm|-D)
