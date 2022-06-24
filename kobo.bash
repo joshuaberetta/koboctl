@@ -60,6 +60,10 @@ function main() {
             kobo_run -cf build --no-cache --force-rm $2
         ;;
 
+        update|-u)
+            kobo_run --auto-update $2
+        ;;
+
         attach|-a)
             if [ -z $2 ]; then
                 enter_container kpi
